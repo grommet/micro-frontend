@@ -1,0 +1,13 @@
+{
+  "name": "legacy",
+  "private": true,
+  "description": "A legacy app with legacy grommet dependencies",
+  "author": "Shimrit (Shimi) Yacobi",
+  "dependencies": {
+    "grommet": "2.16.0",
+    "react": "16.8",
+    "react-dom": "16.8",
+    "react-router-dom": "5.2.0",
+    "styled-components": "5.0.1"
+  }
+}

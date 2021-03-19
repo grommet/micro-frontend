@@ -1,0 +1,38 @@
+{
+  "name": "micro-frontend",
+  "version": "1.0.0",
+  "description": "A proof of concept for using grommet in a micro frontend context.",
+  "private": true,
+  "author": "Shimrit (Shimi) Yacobi",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "run-s install:*",
+    "install:legacy": "cd src/legacy && yarn install",
+    "install:controller": "cd src/controller && yarn install",
+    "serve": "serve -s build",
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "dependencies": {
+    "react-scripts": "3.4.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "serve": "^11.3.2"
+  }
+}
