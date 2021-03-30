@@ -24,7 +24,7 @@ const data = [
 
 const LegacyApp = () => {
   return (
-    <Grommet theme={grommet}>
+    <Grommet theme={grommet} style={{ height: "auto", width: "100%" }} full>
       <Box margin={{ vertical: "medium" }} align="center">
         <Heading size="small" margin="none">
           Loaded versions
