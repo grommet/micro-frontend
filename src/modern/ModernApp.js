@@ -25,14 +25,13 @@ const data = [
 const ModernApp = () => {
   return (
     <Grommet theme={grommet}>
-      <Box margin={{ vertical: "medium" }} align="center">
-        <Heading size="small" margin="none">
-          Loaded versions
-        </Heading>
+      <Box align="center">
+        <Heading>Modern application</Heading>
+        <Heading level={2}>Loaded versions</Heading>
         <Paragraph textAlign="center">
-          The current selected App is Legacy, the Legacy app is using the
-          following legacy versions. The version numbers are loaded dynamically
-          and are not hard coded.
+          The current selected application is Modern, the Modern app is using
+          the newest versions. The version numbers are loaded dynamically and
+          are not hard coded.
         </Paragraph>
         <List
           data={data}
@@ -42,13 +41,12 @@ const ModernApp = () => {
           border={false}
         />
         <Paragraph textAlign="center">
-          (Bug is fixed, the List above has no border)
+          (The List above has no border, the bug that was specified in the
+          Legacy application is fixed in this Grommet version)
         </Paragraph>
       </Box>
-      <Box margin={{ top: "medium" }} align="center">
-        <Heading level={2} size="small">
-          Example
-        </Heading>
+      <Box align="center">
+        <Heading level={2}>Example</Heading>
         <Paragraph textAlign="center">
           Before Grommet {packageJson.version}, Avatar sizes were supported only
           from 'small' size to 'xlarge'. All higher sizes of '2xl', '3xl',
@@ -60,12 +58,12 @@ const ModernApp = () => {
         align="center"
         justify="center"
         direction="row-responsive"
-        gap="large"
+        gap="medium"
         margin={{ top: "medium", bottom: "xlarge" }}
       >
         {["small", "medium", "large", "xlarge", "2xl", "3xl", "4xl", "5xl"].map(
           (size) => (
-            <Box align="center" gap="small">
+            <Box align="center" flex={false} key={size} gap="small">
               <Text>{size}</Text>
               <Avatar background="dark-2" size={size}>
                 SY

@@ -24,11 +24,10 @@ const data = [
 
 const LegacyApp = () => {
   return (
-    <Grommet theme={grommet} style={{ height: "auto", width: "100%" }} full>
-      <Box margin={{ vertical: "medium" }} align="center">
-        <Heading size="small" margin="none">
-          Loaded versions
-        </Heading>
+    <Grommet theme={grommet} style={{ width: "100%" }} full>
+      <Box align="center">
+        <Heading>Legacy application</Heading>
+        <Heading level={2}>Loaded versions</Heading>
         <Paragraph textAlign="center">
           The current selected App is Legacy, the Legacy app is using the
           following legacy versions. The version numbers are loaded dynamically
@@ -43,13 +42,11 @@ const LegacyApp = () => {
         />
         <Paragraph textAlign="center">
           (The list above shouldn't have a border, upgrade the grommet version
-          to fix it.)
+          to fix it or use the Modern App to see it's fixed.)
         </Paragraph>
       </Box>
-      <Box margin={{ top: "medium" }} align="center">
-        <Heading level={2} size="small">
-          Example
-        </Heading>
+      <Box align="center">
+        <Heading level={2}>Example</Heading>
         <Paragraph textAlign="center">
           On Grommet {packageJson.version} Avatar sizes were supported from
           'small' size to 'xlarge'. All higher sizes of '2xl', '3xl', '4xl',
@@ -62,12 +59,12 @@ const LegacyApp = () => {
         align="center"
         justify="center"
         direction="row-responsive"
-        gap="large"
+        gap="medium"
         margin={{ top: "medium", bottom: "xlarge" }}
       >
         {["small", "medium", "large", "xlarge", "2xl", "3xl", "4xl", "5xl"].map(
           (size) => (
-            <Box align="center" gap="small">
+            <Box align="center" gap="small" key={size}>
               <Text>{size}</Text>
               <Avatar background="dark-2" size={size}>
                 SY

@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import styled from "styled-components";
 import {
   grommet,
   Anchor,
@@ -9,6 +10,7 @@ import {
   Header,
   Nav,
   Spinner,
+  Text,
 } from "grommet";
 
 import { Grommet as GrommetIcon, Github, Medium } from "grommet-icons";
@@ -27,67 +29,77 @@ const LegacyApp = lazyLegacyRoot(() => import("../legacy/LegacyApp"));
 // Lazy-load a component from the bundle using modern Grommet.
 const ModernApp = lazyModernRoot(() => import("../modern/ModernApp"));
 
-const gravatarLink =
-  "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80";
-
-export const AppContainer = ({ children, ...rest }) => {
+export const AppContainer = ({ ...rest }) => {
   return (
     <Box
       fill
+      flex
       margin={{ horizontal: "auto" }}
       width={{ max: "xlarge" }}
+      height={{ min: "100%" }}
       {...rest}
-    >
-      <Box flex height={{ min: "100%" }}>
-        {children}
-      </Box>
-    </Box>
+    />
   );
 };
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  font-weight: 500;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: #7d4cdb;
+  }
+`;
+
 const NavHeader = () => (
   <Header background="light-4" pad="medium">
-    <Anchor
-      icon={<GrommetIcon size="medium" />}
-      as={Link}
-      to="/"
-      label="Grommet"
-    />
+    <StyledLink to="/">
+      <Box direction="row" gap="small">
+        <GrommetIcon color="brand" size="medium" />
+        <Text align="center">Grommet</Text>
+      </Box>
+    </StyledLink>
     <Nav direction="row">
-      <Anchor as={Link} to="/legacy">
-        Legacy
-      </Anchor>
-      <Anchor as={Link} to="/modern">
-        Modern
-      </Anchor>
+      <StyledLink to="/legacy">Legacy</StyledLink>
+      <StyledLink to="/modern">Modern</StyledLink>
     </Nav>
   </Header>
 );
 
-const AppFooter = () => (
-  <Footer
-    background="light-2"
-    pad={{ vertical: "small", horizontal: "medium" }}
-  >
-    <Avatar src={gravatarLink} />
-    <Nav direction="row" align="center">
-      <Anchor
-        a11yTitle="More info on Medium blog"
-        href="https://betterprogramming.pub/6-steps-to-create-a-multi-version-react-application-1c3e5b5df7e9"
-        icon={<Medium />}
-        target="_blank"
-        rel="noreferrer noopener"
-      />
-      <Anchor
-        a11yTitle="Github repository"
-        href="https://github.com/grommet/micro-frontend"
-        icon={<Github />}
-        target="_blank"
-        rel="noreferrer noopener"
-      />
-    </Nav>
-  </Footer>
-);
+const AppFooter = () => {
+  const gravatarLink =
+    "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80";
+
+  return (
+    <Footer
+      background="light-2"
+      pad={{ vertical: "small", horizontal: "medium" }}
+    >
+      <Avatar src={gravatarLink} />
+      <Nav direction="row" align="center">
+        <Anchor
+          a11yTitle="More info on Medium blog"
+          href="https://betterprogramming.pub/6-steps-to-create-a-multi-version-react-application-1c3e5b5df7e9"
+          icon={<Medium />}
+          target="_blank"
+          rel="noreferrer noopener"
+        />
+        <Anchor
+          a11yTitle="Github repository"
+          href="https://github.com/grommet/micro-frontend"
+          icon={<Github />}
+          target="_blank"
+          rel="noreferrer noopener"
+        />
+      </Nav>
+    </Footer>
+  );
+};
 
 export const App = () => (
   <BrowserRouter>
@@ -123,7 +135,6 @@ export const App = () => (
             </Route>
           </Switch>
         </Suspense>
-        <Box flex />
         <AppFooter />
       </AppContainer>
     </Grommet>
