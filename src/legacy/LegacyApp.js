@@ -54,13 +54,14 @@ const LegacyApp = () => {
           On Grommet {packageJson.version} Avatar sizes were supported from
           'small' size to 'xlarge'. All higher sizes of '2xl', '3xl', '4xl',
           '5xl' were not supported. Since their size isn't defined the Avatar is
-          setting an auto sizing as the default behavior.
+          setting an auto sizing as the default behavior. Upgrade to Grommet
+          2.17 to view the new sizes.
         </Paragraph>
       </Box>
       <Box
         align="center"
         justify="center"
-        direction="row"
+        direction="row-responsive"
         gap="large"
         margin={{ top: "medium", bottom: "xlarge" }}
       >

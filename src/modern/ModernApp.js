@@ -59,7 +59,7 @@ const ModernApp = () => {
       <Box
         align="center"
         justify="center"
-        direction="row"
+        direction="row-responsive"
         gap="large"
         margin={{ top: "medium", bottom: "xlarge" }}
       >

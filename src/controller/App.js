@@ -75,11 +75,15 @@ const AppFooter = () => (
         a11yTitle="More info on Medium blog"
         href="https://betterprogramming.pub/6-steps-to-create-a-multi-version-react-application-1c3e5b5df7e9"
         icon={<Medium />}
+        target="_blank"
+        rel="noreferrer noopener"
       />
       <Anchor
         a11yTitle="Github repository"
         href="https://github.com/grommet/micro-frontend"
         icon={<Github />}
+        target="_blank"
+        rel="noreferrer noopener"
       />
     </Nav>
   </Footer>
