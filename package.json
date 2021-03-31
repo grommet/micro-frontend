@@ -8,6 +8,7 @@
   "scripts": {
     "postinstall": "run-s install:*",
     "install:legacy": "cd src/legacy && yarn install",
+    "install:modern": "cd src/modern && yarn install",
     "install:controller": "cd src/controller && yarn install",
     "serve": "serve -s build",
     "start": "react-scripts start",
