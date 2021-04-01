@@ -1,6 +1,8 @@
 import React from "react";
 
-import { Box, Heading, Paragraph } from "grommet";
+import { Box, Heading, Image, Paragraph } from "grommet";
+
+import architecture from "./micro-frontend-architecture.png";
 
 const Home = () => (
   <Box margin={{ left: "medium", right: "xlarge" }}>
@@ -16,9 +18,7 @@ const Home = () => (
       upgrade it all at once. Using a single version of Grommet removes a lot of
       complexity and is also essential to ensure the best experience for your
       users who don't have to download the code twice. So always prefer using
-      one Grommet if you can.
-    </Paragraph>
-    <Paragraph fill>
+      one Grommet if you can. <br />
       That being said, for some apps that have been in production for some time,
       upgrading all screens at once may be prohibitively difficult.
       Traditionally, this meant that if a legacy API is deprecated, you would be
@@ -37,12 +37,14 @@ const Home = () => (
       old version of Grommet. Use this approach as a last resort when you can't
       upgrade.
     </Paragraph>
+
     <Heading level={2}>About</Heading>
     <Paragraph fill>
       This app is managed via a Container that loads and runs three applications
       Controller, Legacy and Modern. The container app doesn't own any Grommet,
       React or Styled-components dependencies of it's own.
     </Paragraph>
+    <Image alt="architecture-sketch" src={architecture} />
     <Paragraph fill>
       The <b>Container</b> app runs three different applications, each with
       different Grommet, React and Styled-components versions. The Container is
@@ -62,16 +64,21 @@ const Home = () => (
       <b>Legacy</b>- The Legacy app that will be hosted in the main Container.
       This app is using old versions of Grommet + Styled-Components + React, the
       versions are being displayed in real-time as you enter the page, and are
-      demonstrated by defects from older versions.
+      demonstrated by defects from older versions. Sharp eyes will notice that
+      the Legacy App page is consistent of two applications of Legacy and the
+      Controller, which means the single-page is hosting different versions of
+      Grommet + Styled-Components + React in the same view.
       <br />
       <br />
       <b>Modern</b>- The Modern app that will be hosted in the main Container.
       This app is using the newest versions of Grommet + Styled-Components +
       React, the versions are being displayed in real-time as you enter the page
       and are demonstrated by showing the resolved defects introduced on the
-      Legacy app.
+      Legacy app. Sharp eyes will notice that the Modern App page is consistent
+      of two applications of Modern and the Controller, which means the
+      single-page is hosting different versions of Grommet + Styled-Components +
+      React in the same view.
     </Paragraph>
-
     <Heading level={2}> Ready to Go?</Heading>
     <Paragraph fill>
       Great! you are currently viewing a Grommet page loaded by the Controller

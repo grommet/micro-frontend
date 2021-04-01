@@ -1,19 +1,28 @@
 import React, { Suspense } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   grommet,
   Anchor,
   Avatar,
+  Button,
   Box,
   Footer,
   Grommet,
   Header,
   Nav,
+  Layer,
+  List,
   Spinner,
   Text,
 } from "grommet";
 
-import { Grommet as GrommetIcon, Github, Medium } from "grommet-icons";
+import {
+  CircleInformation,
+  Grommet as GrommetIcon,
+  Github,
+  Medium,
+} from "grommet-icons";
 
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 
@@ -59,9 +68,9 @@ const StyledLink = styled(Link)`
 const NavHeader = () => (
   <Header background="light-4" pad="medium">
     <StyledLink to="/">
-      <Box direction="row" gap="small">
+      <Box direction="row" gap="small" align="center">
         <GrommetIcon color="brand" size="medium" />
-        <Text align="center">Grommet</Text>
+        <Text align="center">Multi-Version Grommet</Text>
       </Box>
     </StyledLink>
     <Nav direction="row">
@@ -72,9 +81,28 @@ const NavHeader = () => (
 );
 
 const AppFooter = () => {
+  const [show, setShow] = useState(false);
   const gravatarLink =
     "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80";
 
+  const resources = [
+    {
+      description: "Micro Frontend",
+      source: "https://martinfowler.com/articles/micro-frontends.html",
+    },
+    {
+      description: "Micro Frontend With React",
+      source:
+        "https://floqast.com/engineering-blog/post/implementing-a-micro-frontend-architecture-with-react/",
+    },
+    {
+      description: "Github react-gradual-upgrade-demo",
+      source: "https://github.com/reactjs/react-gradual-upgrade-demo",
+    },
+  ];
+  const onClose = () => {
+    setShow(false);
+  };
   return (
     <Footer
       background="light-2"
@@ -96,6 +124,33 @@ const AppFooter = () => {
           target="_blank"
           rel="noreferrer noopener"
         />
+        <Button
+          icon={<CircleInformation color="brand" />}
+          onClick={() => {
+            setShow(!show);
+          }}
+        />
+        {show && (
+          <Layer position="center" onClickOutside={onClose} onEsc={onClose}>
+            <Box pad="medium" gap="medium">
+              <Text>More Resources:</Text>
+              <List
+                pad={{ horizontal: "0px", vertical: "small" }}
+                data={resources}
+                border={false}
+                primaryKey={(item) => (
+                  <Anchor
+                    href={item.source}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    {item.description}
+                  </Anchor>
+                )}
+              />
+            </Box>
+          </Layer>
+        )}
       </Nav>
     </Footer>
   );

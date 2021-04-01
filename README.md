@@ -8,14 +8,14 @@ A proof of concept (POC) for using grommet in a micro frontend context.
 This [POC's live app](https://practical-turing-eb3bf3.netlify.app/) is
 built & deployed via Netlify.
 
-This Multi-Version Grommet application is focusing on supporting multi versions
+The Multi-Version Grommet application is focusing on supporting multi versions
 of the following packages:
 
 - Grommet
 - Styled-Components
 - React
 
-This app is an POC of how you can configure a build system to serve
+This app is a POC of how you can configure a build system to serve
 **different versions of Grommet, Styled-Components and React**
 side by side in the same app.
 
@@ -23,15 +23,11 @@ This hybrid approach to support multi versions is only meant to be an escape
 hatch and should only be used as a compromise to prevent your app from getting
 stuck on an old version of Grommet.
 
-**[Learn more about Gradual Upgrades.](https://reactjs.org/blog/2020/08/10/react-v17-rc.html#gradual-upgrades)**
-
-**[Learn more about Multi-Version React Application.](https://betterprogramming.pub/6-steps-to-create-a-multi-version-react-application-1c3e5b5df7e9)**
-
 This demo is built with Create React App for simpler babel/webpack
 configuration, although it is generic and doesn't assume a
 particular build system.
 
-The routing system in this app is built using react-router, but it isn't 
+The routing system in this app is built using react-router, but it isn't
 bounded to using it and could potentially use any other routing mechanism.
 
 ## Why?
@@ -41,16 +37,14 @@ whole app. When you need to upgrade Grommet, it is better to try to upgrade it
 all at once.
 Using a single version of Grommet removes a lot of complexity.
 It is also essential to ensure the best experience for your users who don't have
-to download the code twice. **Always prefer using one Grommet if you can.**
+to download the code twice. **So it is always preferred to use one version of Grommet if you can.**
 
 That being said, for some apps that have been in production for some time,
 upgrading all screens at once may be prohibitively difficult.
 Traditionally, this meant that if a legacy API is deprecated, you would be
 stuck on the old version of Grommet forever.
 That prevents your whole app from receiving improvements and bugfixes.
-This repository demonstrates a hybrid approach.
-It shows how you can use a newer version of Grommet + Styled-Components + React
-for some parts of your app, while
+This repository demonstrates a hybrid approach, it shows how you can use a newer version of Grommet + Styled-Components + React for some parts of your app, while
 **lazy-loading an older version of Grommet + Styled-Components + React**
 for the parts that haven't been migrated yet.
 
@@ -77,6 +71,8 @@ This POC app runs three different applications, each with different versions:
 This app is managed via an overall container that loads and runs the three
 applications above. The container app doesn't own any specific dependencies of
 it's own from the above.
+
+<img alt="architecture" width="600px" height="400px" src="https://github.com/grommet/micro-frontend/tree/master/src/controller/micro-frontend-architecture.png" />
 
 ## Installation
 
@@ -179,3 +175,9 @@ In this demo, I'm demonstrating two ways of nested directions.
    while it loads a modern Grommet + Styled-Components + React versions.
 
 Both nesting directions are valid and working as expected.
+
+### Resources
+
+**[Learn more about Gradual Upgrades.](https://reactjs.org/blog/2020/08/10/react-v17-rc.html#gradual-upgrades)**
+
+**[Learn more about Multi-Version React Application.](https://betterprogramming.pub/6-steps-to-create-a-multi-version-react-application-1c3e5b5df7e9)**
