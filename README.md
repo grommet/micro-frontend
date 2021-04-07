@@ -72,7 +72,7 @@ This app is managed via an overall container that loads and runs the three
 applications above. The container app doesn't own any specific dependencies of
 it's own from the above.
 
-<img alt="architecture" width="600px" height="400px" src="https://github.com/grommet/micro-frontend/tree/master/src/controller/micro-frontend-architecture.png" />
+<img alt="architecture" width="600px" height="400px" src="https://github.com/grommet/micro-frontend/blob/master/src/controller/micro-frontend-architecture.png?raw=true" />
 
 ## Installation
 
