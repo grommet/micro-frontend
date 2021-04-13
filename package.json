@@ -12,7 +12,11 @@
     "install:controller": "cd src/controller && yarn install",
     "serve": "serve -s build",
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "clean": "run-s clean:*",
+    "clean:legacy": "cd src/legacy && rm -rf node_modules && rm -rf yarn.lock",
+    "clean:modern": "cd src/modern && rm -rf node_modules && rm -rf yarn.lock",
+    "clean:controller": "cd src/controller && rm -rf node_modules && rm -rf yarn.lock"
   },
   "dependencies": {
     "react-scripts": "3.4.1"
