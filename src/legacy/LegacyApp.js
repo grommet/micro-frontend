@@ -9,6 +9,7 @@ import {
   List,
   Paragraph,
   Text,
+  Tip,
 } from "grommet";
 import packageJson from "./node_modules/grommet/package.json";
 import styledPackageJson from "./node_modules/styled-components/package.json";
@@ -46,7 +47,17 @@ const LegacyApp = () => {
         </Paragraph>
       </Box>
       <Box align="center">
-        <Heading level={2}>Example</Heading>
+        <Tip
+          plain
+          content="Drop/Tip example with 'round' prop that isn't supported in this grommet version"
+          dropProps={{
+            background: "light-4",
+            round: "large",
+            pad: "xsmall",
+          }}
+        >
+          <Heading level={2}>Example</Heading>
+        </Tip>
         <Paragraph textAlign="center">
           On Grommet {packageJson.version} Avatar sizes were supported from
           'small' size to 'xlarge'. All higher sizes of '2xl', '3xl', '4xl',

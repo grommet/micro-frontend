@@ -99,6 +99,13 @@ const Home = () => (
       loaded dynamically from the versions that are being used on the real-time
       deployment and are not hard coded within the app.
     </Paragraph>
+    <Paragraph fill>
+      In Grommet, the components of Drop & Layer are the two that have the most
+      DOM interventions, hence, these two components are being explicitly
+      demonstrated in this demo app. You can find a Drop (Tip) on the Example
+      Heading of both Legacy & Modern apps, and you can find Layer demonstrated
+      on the Footer on the information icon. All works as expected.
+    </Paragraph>
     <Paragraph fill> Give it a try and let me know what you think!</Paragraph>
   </Box>
 );
