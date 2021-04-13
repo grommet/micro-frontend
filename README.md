@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/cdd3c0be-4f7e-4671-9965-86ee15034a97/deploy-status)](https://app.netlify.com/sites/practical-turing-eb3bf3/deploys)
 
-# micro-frontend
+# micro-frontend architecture
 
 ## Multi-Version Grommet Application
 
@@ -107,7 +107,7 @@ This sample app uses client-side routing and consists of three routes:
 
 ### Dependencies
 
-We will use four different `package.json`s: one for non-Grommet code at the root, and three in the respective `src/legacy`, `src/modern`, and `src/controller` folders that specify the Grommet dependencies:
+We will use four different `package.json`s: one for non-Grommet code at the root (Container), and three in the respective `src/legacy`, `src/modern`, and `src/controller` folders that specify the Grommet dependencies:
 
 - **`package.json`**: The root `package.json` is a place for build dependencies (such as `react-scripts`). We do **not** include Grommet & friends dependencies or any React-related libraries in this file.
 - **`src/controller/package.json`**: This is where we declare `grommet`, `styled-components` and `react`, `react-dom` dependencies for the "controller" tree which navigate between different apps (legacy/modern). In this app, the controller is using Grommet 2.17.0.
@@ -125,7 +125,7 @@ The `scripts` in the root `package.json` are set up so that when you run `yarn i
 There are a few key folders in this example:
 
 - **`src`**: Root of the source tree of the overall container.
-- **`src/controller`**: This app is controlling the lazy loading of the apps that are being loaded & rendered. This code is using a new version of Grommet and includes new Styled-Components and React components.
+- **`src/controller`**: This app is controlling the lazy loading of the apps that are being loaded & rendered. This code is using a new version of Grommet and includes new version of React.
 - **`src/legacy`**: This is where all the code that is using the older version of Grommet & friends should go. This includes Styled-Components and React components and Hooks, and general product code that is **only** used by the legacy trees.
 - **`src/modern`**: This is where all the code that is using the newest version of Grommet should go. This includes Styled-Components and React components and Hooks, and general product code that is **only** used by the modern trees.
 
