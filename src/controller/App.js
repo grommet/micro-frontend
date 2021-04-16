@@ -63,17 +63,20 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     color: #7d4cdb;
   }
+  &:focus {
+    outline: 1px solid #6fffb0;
+  }
 `;
 
 const NavHeader = () => (
-  <Header background="light-4" pad="medium">
+  <Header background="light-2" pad="medium">
     <StyledLink to="/">
       <Box direction="row" gap="small" align="center">
         <GrommetIcon color="brand" size="medium" />
         <Text align="center">Multi-Version Grommet</Text>
       </Box>
     </StyledLink>
-    <Nav direction="row">
+    <Nav direction="row" aria-label="apps navigation">
       <StyledLink to="/legacy">Legacy</StyledLink>
       <StyledLink to="/modern">Modern</StyledLink>
     </Nav>
@@ -161,35 +164,37 @@ export const App = () => (
     <Grommet theme={grommet} full style={{ height: "auto", width: "100%" }}>
       <AppContainer>
         <NavHeader />
-        <Suspense
-          fallback={
-            <Box align="center" justify="center" pad="xlarge">
-              <Spinner
-                border={[
-                  {
-                    side: "horizontal",
-                    color: "brand",
-                    size: "large",
-                    style: "inset",
-                  },
-                ]}
-                size="large"
-              />
-            </Box>
-          }
-        >
-          <Switch>
-            <Route path="/legacy">
-              <LegacyApp />
-            </Route>
-            <Route path="/modern">
-              <ModernApp />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Suspense>
+        <span role="main">
+          <Suspense
+            fallback={
+              <Box align="center" justify="center" pad="xlarge">
+                <Spinner
+                  border={[
+                    {
+                      side: "horizontal",
+                      color: "brand",
+                      size: "large",
+                      style: "inset",
+                    },
+                  ]}
+                  size="large"
+                />
+              </Box>
+            }
+          >
+            <Switch>
+              <Route path="/legacy">
+                <LegacyApp />
+              </Route>
+              <Route path="/modern">
+                <ModernApp />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </Suspense>
+        </span>
         <AppFooter />
       </AppContainer>
     </Grommet>
