@@ -31,11 +31,25 @@ const Home = () => (
       your app, while lazy-loading an older version of Grommet +
       Styled-Components + React for the parts that haven't been migrated yet.
     </Paragraph>
+    <Heading level={2}>Background</Heading>
     <Paragraph fill>
-      This hybrid approach is inherently more complex and only meant to be an
-      escape hatch and a compromise to prevent your app from getting stuck on an
-      old version of Grommet. Use this approach as a last resort when you can't
-      upgrade.
+      React 17 enabled the feature of supporting multiple React versions using
+      lazy loading on a micro frontend architecture. As you probably
+      experienced, the upgrade to React 17 was a relatively smooth upgrade --
+      considering it was a major release it had only few breaking changes. This
+      release was mainly to provide the infrastructure to support micro frontend
+      architecture, so in future major release changes of React (that may
+      contain heavier breaking changes), developers could upgrade legacy
+      projects gradually while still running the latest version of React in
+      their modern development environment. This micro frontend architecture
+      should be a middle step to allow developers the opportunity to upgrade
+      versions gradually.
+    </Paragraph>
+    <Paragraph fill>
+      This micro frontend hybrid approach is inherently more complex and only
+      meant to be an escape hatch and a compromise to prevent your app from
+      getting stuck on an old version of Grommet. Use this approach as a last
+      resort when you can't upgrade.
     </Paragraph>
 
     <Heading level={2}>About</Heading>
