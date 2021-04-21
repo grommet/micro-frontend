@@ -25,7 +25,7 @@ const data = [
 
 const LegacyApp = () => {
   return (
-    <Grommet theme={grommet} style={{ width: "100%" }} full>
+    <Grommet theme={grommet} style={{ width: "100%" }}>
       <Box align="center">
         <Heading>Legacy application</Heading>
         <Heading level={2}>Loaded versions</Heading>

@@ -164,7 +164,7 @@ export const App = () => (
     <Grommet theme={grommet} full style={{ height: "auto", width: "100%" }}>
       <AppContainer>
         <NavHeader />
-        <span role="main">
+        <Box role="main" flex={false}>
           <Suspense
             fallback={
               <Box align="center" justify="center" pad="xlarge">
@@ -194,7 +194,7 @@ export const App = () => (
               </Route>
             </Switch>
           </Suspense>
-        </span>
+        </Box>
         <AppFooter />
       </AppContainer>
     </Grommet>
