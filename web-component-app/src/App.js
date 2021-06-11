@@ -11,8 +11,9 @@ import {
   Text,
   Tip,
 } from "grommet";
-import packageJson from "./node_modules/grommet/package.json";
-import styledPackageJson from "./node_modules/styled-components/package.json";
+
+import packageJson from "../node_modules/grommet/package.json";
+import styledPackageJson from "../node_modules/styled-components/package.json";
 
 const data = [
   { package: "Grommet", version: packageJson.version },
@@ -23,15 +24,15 @@ const data = [
   },
 ];
 
-const LegacyApp = () => {
+const App = () => {
   return (
-    <Grommet theme={grommet} style={{ width: "100%" }}>
-      <Box align="center">
-        <Heading>Legacy application</Heading>
+    <Grommet theme={grommet}>
+      <Box>
+        <Heading>web component</Heading>
         <Heading level={2}>Loaded versions</Heading>
-        <Paragraph textAlign="center">
-          The current selected App is Legacy, the Legacy app is using the
-          following legacy versions. The version numbers are loaded dynamically
+        <Paragraph>
+          The current selected App is using the
+          following versions. The version numbers are loaded dynamically
           and are not hard coded.
         </Paragraph>
         <List
@@ -41,12 +42,12 @@ const LegacyApp = () => {
           secondaryKey="version"
           border={false}
         />
-        <Paragraph textAlign="center">
+        <Paragraph>
           (The list above shouldn't have a border, upgrade the grommet version
-          to fix it or use the Modern App to see it's fixed.)
+          to fix it or use the global App to see it's fixed.)
         </Paragraph>
       </Box>
-      <Box align="center">
+      <Box>
         <Tip
           plain
           content="Drop/Tip example with 'round' prop that isn't supported in this grommet version"
@@ -58,7 +59,7 @@ const LegacyApp = () => {
         >
           <Heading level={2}>Example</Heading>
         </Tip>
-        <Paragraph textAlign="center">
+        <Paragraph>
           On Grommet {packageJson.version} Avatar sizes were supported from
           'small' size to 'xlarge'. All higher sizes of '2xl', '3xl', '4xl',
           '5xl' were not supported. Since their size isn't defined the Avatar is
@@ -88,4 +89,4 @@ const LegacyApp = () => {
   );
 };
 
-export default LegacyApp;
+export default App;

@@ -1,204 +1,123 @@
-import React, { Suspense } from "react";
-import { useState } from "react";
-import styled from "styled-components";
-import {
-  grommet,
-  Anchor,
-  Avatar,
-  Button,
-  Box,
-  Footer,
-  Grommet,
-  Header,
-  Nav,
-  Layer,
-  List,
-  Spinner,
-  Text,
-} from "grommet";
-
-import {
-  CircleInformation,
-  Grommet as GrommetIcon,
-  Github,
-  Medium,
-} from "grommet-icons";
-
-import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
-
-// LazyRoot has to have its own instance per module
-import lazyLegacyRoot from "./lazyLegacyRoot";
-import lazyModernRoot from "./lazyModernRoot";
+import React, { useEffect, useRef, useState } from "react";
+import { grommet, Button, Box, Grommet, Header, Nav } from "grommet";
+import { Router, RouterContext, Routes, Route } from "./Router";
 
 import Home from "./Home";
 
-// Lazy-load a component from the bundle using legacy Grommet.
-const LegacyApp = lazyLegacyRoot(() => import("../legacy/LegacyApp"));
+// name must match the global added by the script
+const LazyGlobal = ({ name, url }) => {
+  const [loaded, setLoaded] = useState();
+  const containerRef = useRef();
 
-// Lazy-load a component from the bundle using modern Grommet.
-const ModernApp = lazyModernRoot(() => import("../modern/ModernApp"));
+  useEffect(() => {
+    const container = containerRef.current;
 
-export const AppContainer = ({ ...rest }) => {
-  return (
-    <Box
-      fill
-      flex
-      margin={{ horizontal: "auto" }}
-      width={{ max: "xlarge" }}
-      height={{ min: "100%" }}
-      {...rest}
-    />
-  );
+    if (loaded) {
+      // after it loads, mount the contents in the container
+      window[name].mount(container);
+    } else if (document.getElementById(name)) {
+      setLoaded(true);
+    } else {
+      // inject a script tag for it
+      // the sequence matters: appendChild, onload, src
+      const script = document.createElement("script");
+      script.id = name;
+      document.body.appendChild(script);
+      script.onload = () => setLoaded(true);
+      script.type = "text/javascript";
+      script.async = true;
+      script.src = url;
+    }
+
+    return () => {
+      // when unmounting LazyGlobal, unmount the contents
+      if (loaded) window[name].unmount(container);
+    };
+  }, [loaded, name, url]);
+
+  return <div ref={containerRef} />;
 };
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  font-weight: 500;
+// name must match the name of the web component name added by the script
+const LazyWebComponent = ({ name, url }) => {
+  const [loaded, setLoaded] = useState();
+  const containerRef = useRef();
 
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-    color: #7d4cdb;
-  }
-  &:focus {
-    outline: 1px solid #6fffb0;
-  }
-`;
+  useEffect(() => {
+    const container = containerRef.current;
 
-const NavHeader = () => (
-  <Header background="light-2" pad="medium">
-    <StyledLink to="/">
-      <Box direction="row" gap="small" align="center">
-        <GrommetIcon color="brand" size="medium" />
-        <Text align="center">Multi-Version Grommet</Text>
-      </Box>
-    </StyledLink>
-    <Nav direction="row" aria-label="apps navigation">
-      <StyledLink to="/legacy">Legacy</StyledLink>
-      <StyledLink to="/modern">Modern</StyledLink>
-    </Nav>
-  </Header>
-);
+    if (loaded) {
+      // after it loads, append the contents to the container
+      const contents = document.createElement(name);
+      container.appendChild(contents);
+    } else if (document.getElementById(name)) {
+      setLoaded(true);
+    } else {
+      // inject a script tag for it
+      // the sequence matters: appendChild, onload, src
+      const script = document.createElement("script");
+      script.id = name;
+      document.body.appendChild(script);
+      script.onload = () => setLoaded(true);
+      script.type = "text/javascript";
+      script.async = true;
+      script.src = url;
+    }
+  }, [loaded, name, url]);
 
-const AppFooter = () => {
-  const [show, setShow] = useState(false);
-  const gravatarLink =
-    "//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80";
-
-  const resources = [
-    {
-      description: "Micro Frontend",
-      source: "https://martinfowler.com/articles/micro-frontends.html",
-    },
-    {
-      description: "Micro Frontend With React",
-      source:
-        "https://floqast.com/engineering-blog/post/implementing-a-micro-frontend-architecture-with-react/",
-    },
-    {
-      description: "Github react-gradual-upgrade-demo",
-      source: "https://github.com/reactjs/react-gradual-upgrade-demo",
-    },
-  ];
-  const onClose = () => {
-    setShow(false);
-  };
-  return (
-    <Footer
-      background="light-2"
-      pad={{ vertical: "small", horizontal: "medium" }}
-    >
-      <Avatar src={gravatarLink} />
-      <Nav direction="row" align="center">
-        <Anchor
-          a11yTitle="More info on Medium blog"
-          href="https://betterprogramming.pub/6-steps-to-create-a-multi-version-react-application-1c3e5b5df7e9"
-          icon={<Medium />}
-          target="_blank"
-          rel="noreferrer noopener"
-        />
-        <Anchor
-          a11yTitle="Github repository"
-          href="https://github.com/grommet/micro-frontend"
-          icon={<Github />}
-          target="_blank"
-          rel="noreferrer noopener"
-        />
-        <Button
-          icon={<CircleInformation color="brand" />}
-          onClick={() => {
-            setShow(!show);
-          }}
-        />
-        {show && (
-          <Layer position="center" onClickOutside={onClose} onEsc={onClose}>
-            <Box pad="medium" gap="medium">
-              <Text>More Resources:</Text>
-              <List
-                pad={{ horizontal: "0px", vertical: "small" }}
-                data={resources}
-                border={false}
-                primaryKey={(item) => (
-                  <Anchor
-                    href={item.source}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    {item.description}
-                  </Anchor>
-                )}
-              />
-            </Box>
-          </Layer>
-        )}
-      </Nav>
-    </Footer>
-  );
+  return <div ref={containerRef} />;
 };
 
 export const App = () => (
-  <BrowserRouter>
-    <Grommet theme={grommet} full style={{ height: "auto", width: "100%" }}>
-      <AppContainer>
-        <NavHeader />
-        <Box role="main" flex={false}>
-          <Suspense
-            fallback={
-              <Box align="center" justify="center" pad="xlarge">
-                <Spinner
-                  border={[
-                    {
-                      side: "horizontal",
-                      color: "brand",
-                      size: "large",
-                      style: "inset",
-                    },
-                  ]}
-                  size="large"
+  <Router>
+    <Grommet theme={grommet} full>
+      <Box flex={false} margin="large" align="center">
+        <Header width={{ width: "100%", max: "large" }}>
+          <RouterContext.Consumer>
+            {({ path, push }) => (
+              <Nav direction="row">
+                <Button
+                  label="home"
+                  active={path === "/"}
+                  onClick={() => push("/")}
                 />
-              </Box>
-            }
-          >
-            <Switch>
-              <Route path="/legacy">
-                <LegacyApp />
-              </Route>
-              <Route path="/modern">
-                <ModernApp />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </Suspense>
+                <Button
+                  label="global"
+                  active={path === "/global"}
+                  onClick={() => push("/global")}
+                />
+                <Button
+                  label="web component"
+                  active={path === "/web-component"}
+                  onClick={() => push("/web-component")}
+                />
+              </Nav>
+            )}
+          </RouterContext.Consumer>
+        </Header>
+
+        <Box role="main" width={{ width: '100%', max: 'large' }}>
+          <Routes>
+            <Route path="/web-component">
+              <LazyWebComponent
+                name="micro-web-component"
+                url="http://127.0.0.1:8081/micro-web-component.js"
+              />
+            </Route>
+            <Route path="/global">
+              <LazyGlobal
+                name="micro-global"
+                url="http://127.0.0.1:8080/micro-global.js"
+              />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Routes>
         </Box>
-        <AppFooter />
-      </AppContainer>
+      </Box>
     </Grommet>
-  </BrowserRouter>
+  </Router>
 );
 
 export default App;

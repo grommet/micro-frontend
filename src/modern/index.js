@@ -1,1 +1,0 @@
-export { ModernApp } from "./ModernApp";

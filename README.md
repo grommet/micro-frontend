@@ -94,27 +94,26 @@ yarn serve
 This sample app uses client-side routing and consists of three routes:
 
 - `/` renders the home page which uses a the versions coming from the controller app.
-- `/legacy` renders a page which uses older versions of Grommet + Styled-Components + React.
-- `/modern` renders a page which uses newest versions of Grommet + Styled-Components + React.
+- `/web-component` renders a page which uses older versions of Grommet + Styled-Components + React.
+- `/global` renders a page which uses newest versions of Grommet + Styled-Components + React.
 
 **The purpose of this demo is to show some nuances of such setup:**
 
-- How to install three versions of Grommet in a single app with npm side by side.
+- How to build and publish separate apps with different versions of Grommet in them but then load them within a single app.
 - How to avoid the ["invalid Hook call" error](https://github.com/facebook/react/issues/13991) while nesting React (Grommet) trees.
 - How to lazy-load different Grommet bundle so it's only loaded on the screens
   that use it.
-- How to do all of this without a special bundler configuration.
 
 ### Dependencies
 
-We will use four different `package.json`s: one for non-Grommet code at the root (Container), and three in the respective `src/legacy`, `src/modern`, and `src/controller` folders that specify the Grommet dependencies:
+We will use four different `package.json`s: one for non-Grommet code at the root (Container), and three in the respective `web-component-app`, `global-app`, and `src/controller` folders that specify the Grommet dependencies:
 
 - **`package.json`**: The root `package.json` is a place for build dependencies (such as `react-scripts`). We do **not** include Grommet & friends dependencies or any React-related libraries in this file.
 - **`src/controller/package.json`**: This is where we declare `grommet`, `styled-components` and `react`, `react-dom` dependencies for the "controller" tree which navigate between different apps (legacy/modern). In this app, the controller is using Grommet 2.17.0.
-- **`src/legacy/package.json`**: This is where we declare `grommet`, `styled-components` and `react`, `react-dom` dependencies for the "legacy" trees.
-  The legacy app is using Grommet 2.16.0 (although, we could downgrade it further below).
-- **`src/modern/package.json`**: This is where we declare `grommet`, `styled-components` and `react`, `react-dom` dependencies for the "modern" trees.
-  The modern app is using Grommet 2.17.1.
+- **`web-component-app`**: This is a separately built and published app.
+  This app is using Grommet 2.16.0 (although, we could downgrade it further below).
+- **`src/modern`**: This is a separately built and published app.
+  This app is using Grommet 2.17.1.
 
 The `scripts` in the root `package.json` are set up so that when you run `yarn install` in it, it also runs `yarn install` in all `src/controller`, `src/legacy` and `src/modern` folders.
 
@@ -126,8 +125,8 @@ There are a few key folders in this example:
 
 - **`src`**: Root of the source tree of the overall container.
 - **`src/controller`**: This app is controlling the lazy loading of the apps that are being loaded & rendered. This code is using a new version of Grommet and includes new version of React.
-- **`src/legacy`**: This is where all the code that is using the older version of Grommet & friends should go. This includes Styled-Components and React components and Hooks, and general product code that is **only** used by the legacy trees.
-- **`src/modern`**: This is where all the code that is using the newest version of Grommet should go. This includes Styled-Components and React components and Hooks, and general product code that is **only** used by the modern trees.
+- **`web-component-app`**: This is where all the code that is using the older version of Grommet & friends should go. This includes Styled-Components and React components and Hooks, and general product code that is **only** used by the legacy trees.
+- **`global-app`**: This is where all the code that is using the newest version of Grommet should go. This includes Styled-Components and React components and Hooks, and general product code that is **only** used by the modern trees.
 
 ### Lazy Loading
 

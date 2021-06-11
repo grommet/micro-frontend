@@ -9,5 +9,16 @@
     "react-dom": "16.8",
     "react-router-dom": "5.2.0",
     "styled-components": "5.1.0"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
   }
 }
