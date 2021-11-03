@@ -42,8 +42,8 @@ const LegacyApp = () => {
           border={false}
         />
         <Paragraph textAlign="center">
-          (The list above shouldn't have a border, upgrade the grommet version
-          to fix it or use the Modern App to see it's fixed.)
+          (The List component above shouldn't have a border. Upgrade the grommet version
+          to fix it or use the Modern App to see that it's fixed.)
         </Paragraph>
       </Box>
       <Box align="center">
