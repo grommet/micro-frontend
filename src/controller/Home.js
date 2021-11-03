@@ -17,7 +17,7 @@ const Home = () => (
       whole app. When you need to upgrade Grommet, it is better to try to
       upgrade it all at once. Using a single version of Grommet removes a lot of
       complexity and is also essential to ensure the best experience for your
-      users who don't have to download the code twice. So always prefer using
+      users who don't have to download the code more than once. So always prefer using
       one Grommet if you can. <br />
       That being said, for some apps that have been in production for some time,
       upgrading all screens at once may be prohibitively difficult.
